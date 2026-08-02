@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import api from "../../services/api";
+import Link from "next/link";
 
 export default function Login() {
   const router = useRouter();
@@ -33,7 +34,6 @@ export default function Login() {
       alert("Login Successful");
 
       router.push("/dashboard");
-
     } catch (error) {
       alert(error.response?.data?.message || "Login Failed");
     }
@@ -41,15 +41,11 @@ export default function Login() {
 
   return (
     <div className="flex justify-center items-center min-h-screen">
-
       <form
         onSubmit={handleSubmit}
         className="w-full max-w-md border rounded-lg p-6 shadow"
       >
-
-        <h1 className="text-3xl font-bold mb-6 text-center">
-          Login
-        </h1>
+        <h1 className="text-3xl font-bold mb-6 text-center">Login</h1>
 
         <input
           type="email"
@@ -75,9 +71,16 @@ export default function Login() {
         >
           Login
         </button>
-
+        <p className="text-center mt-5 text-gray-400">
+          New user?{" "}
+          <Link
+            href="/register"
+            className="text-blue-500 hover:text-blue-400 font-semibold hover:underline"
+          >
+            Register here
+          </Link>
+        </p>
       </form>
-
     </div>
   );
 }

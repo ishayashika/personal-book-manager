@@ -2,9 +2,11 @@
 
 import { useState } from "react";
 import api from "../../services/api";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export default function Register() {
-
+  const router = useRouter();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -22,34 +24,23 @@ export default function Register() {
     e.preventDefault();
 
     try {
-
-      const response = await api.post(
-        "/auth/register",
-        formData
-      );
+      const response = await api.post("/auth/register", formData);
 
       alert(response.data.message);
 
-      console.log(response.data);
-
+      router.push("/login");
     } catch (error) {
-
       alert(error.response?.data?.message || "Something went wrong");
-
     }
   };
 
   return (
     <div className="flex justify-center items-center min-h-screen">
-
       <form
         onSubmit={handleSubmit}
         className="w-full max-w-md border rounded-lg p-6 shadow"
       >
-
-        <h1 className="text-3xl font-bold mb-6 text-center">
-          Register
-        </h1>
+        <h1 className="text-3xl font-bold mb-6 text-center">Register</h1>
 
         <input
           type="text"
@@ -85,8 +76,16 @@ export default function Register() {
           Register
         </button>
 
+        <p className="text-center mt-5 text-gray-400">
+          Already have an account?{" "}
+          <Link
+            href="/login"
+            className="text-blue-500 hover:text-blue-400 font-semibold hover:underline"
+          >
+            Login here
+          </Link>
+        </p>
       </form>
-
     </div>
   );
 }

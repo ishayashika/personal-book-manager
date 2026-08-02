@@ -82,12 +82,6 @@ export default function Dashboard() {
         <div className="flex justify-between items-center mb-8">
           <h1 className="text-4xl font-bold">Dashboard 📚</h1>
 
-          <button
-            onClick={handleLogout}
-            className="bg-red-600 hover:bg-red-700 text-white px-5 py-2 rounded-lg transition"
-          >
-            Logout
-          </button>
         </div>
 
         {/* Statistics Cards */}
